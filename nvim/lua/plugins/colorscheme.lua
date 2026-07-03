@@ -1,10 +1,10 @@
 return { 
-  "Mofiqul/dracula.nvim", 
+  "ellisonleao/gruvbox.nvim", 
   priority = 1000,
-  name = "dracula",
+  name = "gruvbox",
   lazy = false,
   config = function()
-    vim.cmd.colorscheme "dracula"
+    vim.cmd.colorscheme "gruvbox"
   end
 }
 

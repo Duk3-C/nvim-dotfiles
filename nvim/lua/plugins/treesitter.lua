@@ -1,7 +1,8 @@
 return {
   "nvim-treesitter/nvim-treesitter", build = ":TSUpdate",
-    otps = {
+    opts = {
       ensure_installed = { "lua", "c", "html", "javascript", "python", "cpp", "rust", "zig" },
+    autoinstall = true,
     highlight = { enable = true },
     indent = { enable = true },
   },
