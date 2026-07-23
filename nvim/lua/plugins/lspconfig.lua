@@ -15,6 +15,9 @@ return {
 					"clangd",
 					"zls",
 					"pyright",
+					"asm_lsp",
+					"ast_grep",
+					"nil_ls",
 				},
 			})
 		end,
@@ -52,6 +55,77 @@ return {
 				},
 			}
 			vim.lsp.enable("clangd")
+
+			vim.lsp.config.zls = {
+				capabilities = capabilities,
+				cmd = { "zls" },
+				filetypes = { "zig", "zir" },
+				root_markers = { "zls.json", "build.zig", ".git" },
+			}
+			vim.lsp.enable("zls")
+
+			vim.lsp.config.pyright = {
+				capabilities = capabilities,
+				cmd = { "pyright-langserver", "--stdio" },
+				filetypes = { "python" },
+				root_markers = {
+					"pyproject.toml",
+					"setup.py",
+					"setup.cfg",
+					"requirements.txt",
+					"Pipfile",
+					"pyrightconfig.json",
+					".git",
+				},
+				settings = {
+					python = {
+						analysis = {
+							autoSearchPaths = true,
+							useLibraryCodeForTypes = true,
+							diagnosticMode = "openFilesOnly",
+						},
+					},
+				},
+			}
+			vim.lsp.enable("pyright")
+
+			vim.lsp.config.asm_lsp = {
+				capabilities = capabilities,
+				cmd = { "asm-lsp" },
+				filetypes = { "asm", "s", "S", "vmasm" },
+				root_markers = { ".asm-lsp.toml", ".git" },
+			}
+			vim.lsp.enable("asm_lsp")
+
+			vim.lsp.config.nil_ls = {
+				capabilities = capabilities,
+				cmd = { "nil" },
+				filetypes = { "nix" },
+				root_markers = { "flake.nix", ".git" },
+			}
+			vim.lsp.enable("nil_ls")
+
+			vim.lsp.config.ast_grep = {
+				capabilities = capabilities,
+				cmd = { "ast-grep", "lsp" },
+				filetypes = {
+					"c",
+					"cpp",
+					"rust",
+					"go",
+					"java",
+					"python",
+					"javascript",
+					"typescript",
+					"html",
+					"css",
+					"kotlin",
+					"dart",
+					"lua",
+				},
+				root_markers = { "sgconfig.yaml", "sgconfig.yml" },
+			}
+			vim.lsp.enable("ast_grep")
 
 			vim.api.nvim_create_user_command("LspInfo", function()
 				local clients = vim.lsp.get_clients()

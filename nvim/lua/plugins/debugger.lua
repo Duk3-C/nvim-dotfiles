@@ -25,18 +25,20 @@ return {
 			dapui.close()
 		end
 
+		local mason_path = vim.fn.stdpath("data") .. "/mason/packages/"
+
 		dap.adapters.lldb = {
 			type = "server",
 			port = "${port}",
 			executable = {
-				command = "/usr/bin/lldb-vscode",
+				command = mason_path .. "codelldb/extension/adapter/codelldb",
 				args = { "--port", "${port}" },
 			},
 		}
 
     dap.adapters.debugpy = {
         type = "executable",
-        command = "python3",
+        command = mason_path .. "debugpy/venv/bin/python",
         args = { "-m", "debugpy.adapter" },
     }
 

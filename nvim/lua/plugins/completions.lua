@@ -11,9 +11,16 @@ return {
 	},
 	{
 		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+		},
 		config = function()
 			local cmp = require("cmp")
-      require("luasnip.loaders.from_vscode").lazy_load()
+			require("luasnip.loaders.from_vscode").lazy_load()
+			require("luasnip.loaders.from_lua").lazy_load({
+				paths = { vim.fn.stdpath("config") .. "/snippets" },
+			})
 
 			cmp.setup({
 				snippet = {
@@ -33,9 +40,11 @@ return {
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
 				}),
 				sources = cmp.config.sources({
+					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 				}, {
 					{ name = "buffer" },
+					{ name = "path" },
 				}),
 			})
 		end,
